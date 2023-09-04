@@ -9,12 +9,12 @@ const app = express();
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/seu-banco-de-dados', {
+mongoose.connect('mongodb://localhost:27017', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-app.post('/api/users', async (req, res) => {
+app.post('/users', async (req, res) => {
   try {
     const user = new User(req.body.user);
     await user.save();
@@ -24,7 +24,7 @@ app.post('/api/users', async (req, res) => {
   }
 });
 
-app.get('/api/users', async (req, res) => {
+app.get('/user', async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -33,7 +33,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-app.get('/api/roles', async (req, res) => {
+app.get('/roles', async (req, res) => {
   try {
     const roles = await Role.find();
     res.json(roles);
